@@ -15,6 +15,7 @@ void UTimeComponent::Setup()
 		MaxTimeTracked = GameMode->MaxTimeTracked;
 		SnapFrequency = GameMode->TrackFrequency;
 
+		// Casts owner root component to primitive component for more universal control regardless of the exact root component
 		OwnerRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
 	}
 }
@@ -52,6 +53,7 @@ void UTimeComponent::ReverseTime()
 		{
 			Progress = 0.f;
 
+			// Removes used time snaps. This prevents "fast-forwarding" back through time once reversed. Could be removed and altered.
 			TimeSnaps.RemoveAt(TimeSnaps.Num() - 1);
 		}
 	}
@@ -64,6 +66,7 @@ void UTimeComponent::ReverseTime()
 
 void UTimeComponent::PauseTime()
 {
+	// Pauses based on the last time snap and pauses physics on the object. Can still collide with objects while frozen.
 	PausePhysics(true);
 	ApplyTime(TimeSnaps.Last());
 }
@@ -112,7 +115,7 @@ void UTimeComponent::StopManipulation()
 	bIsFrozen = false;
 
 	PausePhysics(false);
-
+	// Applies the last saved time snap to apply the latest physics on the object. This creates more accurate recreations of moments in time.
 	ApplyTime(TimeSnaps.Last());
 }
 
