@@ -4,6 +4,7 @@
 
 ATimeObjectBase::ATimeObjectBase()
 {
+	// tick is disabled by default
 	PrimaryActorTick.bCanEverTick = false;
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
@@ -13,6 +14,7 @@ ATimeObjectBase::ATimeObjectBase()
 	TimeComponent = CreateDefaultSubobject<UTimeComponent>(TEXT("Time Component"));
 }
 
+// Freezes the object and applies the time warp material.
 void ATimeObjectBase::TimePause()
 {
 	if (!TimeComponent->bIsFrozen)
