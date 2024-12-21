@@ -3,6 +3,7 @@
 
 ## Controls Default:
 - **Left Mouse: Shoot a sphere trace that freezes an object in time**
+- **Right Mouse: Unfreezes all objects**
 - **Scroll Wheel Down: Begins reversing time on *ALL* frozen objects. Incrementally increasing reversing speed the more you scroll.**
 - **Scroll Wheel Up: Slows down and eventually freezes all reversing objects in time.**
 
